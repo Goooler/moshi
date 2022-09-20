@@ -18,13 +18,13 @@ dependencies {
 
 val japicmp = tasks.register<JapicmpTask>("japicmp") {
   dependsOn("jar")
-  oldClasspath = baseline
-  newClasspath = latest
-  isOnlyBinaryIncompatibleModified = true
-  isFailOnModification = true
-  txtOutputFile = file("$buildDir/reports/japi.txt")
-  isIgnoreMissingClasses = true
-  isIncludeSynthetic = true
+  oldClasspath.from(baseline)
+  newClasspath.from(latest)
+  onlyModified.set(true)
+  failOnModification.set(true)
+  txtOutputFile.set(file("$buildDir/reports/japi.txt"))
+  ignoreMissingClasses.set(true)
+  includeSynthetic.set(true)
 }
 
 tasks.named("check").configure {
